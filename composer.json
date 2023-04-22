@@ -1,0 +1,17 @@
+{
+    "name": "lindabalode/crypto-api",
+    "autoload": {
+        "psr-4": {
+            "Lindabalode\\CryptoApi\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "lindabalode",
+            "email": "balode.lindaa@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
