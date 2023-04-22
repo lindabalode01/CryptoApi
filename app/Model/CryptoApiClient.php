@@ -35,16 +35,16 @@ class CryptoApiClient
             ]);
         $cryptCurrency = json_decode($response->getBody()->getContents(), true);
         return  new Coins(
-            $cryptCurrency->name,
-            $cryptCurrency->symbol,
-            $cryptCurrency->total_supply,
-            $cryptCurrency->date_added,
-            $cryptCurrency->quote->EUR->price,
-            $cryptCurrency->quotes->EUR->volume_24h,
-            $cryptCurrency->quotes->EUR->percent_change_1h,
-            $cryptCurrency->quotes->EUR->percent_change_7d,
-            $cryptCurrency->quotes->EUR->market_cap,
-            $cryptCurrency->max_supply
+            $cryptCurrency->data->name,
+            $cryptCurrency->data->symbol,
+            $cryptCurrency->data->total_supply,
+            $cryptCurrency->data->date_added,
+            $cryptCurrency->data->quote->EUR->price,
+            $cryptCurrency->data->quotes->EUR->volume_24h,
+            $cryptCurrency->data->quotes->EUR->percent_change_1h,
+            $cryptCurrency->data->quotes->EUR->percent_change_7d,
+            $cryptCurrency->data->quotes->EUR->market_cap,
+            $cryptCurrency->data->max_supply
             );
     }
 }
