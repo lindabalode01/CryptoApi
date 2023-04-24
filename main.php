@@ -1,9 +1,5 @@
 <?php
-
-use App\AppUI;
-use App\Model\CryptoApiClient;
-
 require_once 'vendor/autoload.php';
-$cryptoApiClient = new CryptoApiClient();
-$appUi = new AppUI($cryptoApiClient);
+$api = new App\Model\CryptoApiClient();
+$appUi = new App\AppUI($api);
 $appUi->run();

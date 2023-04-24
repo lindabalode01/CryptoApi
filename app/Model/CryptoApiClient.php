@@ -8,14 +8,14 @@ use GuzzleHttp\Client;
 class CryptoApiClient
 {
     public $client;
-    public $coin = array();
+    public array $coinArray;
 
     public function __construct()
     {
         $this->client = new Client();
     }
 
-    public function cryptoCurrencyData(): Coins
+    public function cryptoCurrencyData(): array
     {
         $key = 'aec8fffc-b52d-4249-ab91-71d300376343';
         $url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
@@ -34,17 +34,26 @@ class CryptoApiClient
                 'query' => $parameters
             ]);
         $cryptCurrency = json_decode($response->getBody()->getContents(), true);
-        return  new Coins(
-            $cryptCurrency->data->name,
-            $cryptCurrency->data->symbol,
-            $cryptCurrency->data->total_supply,
-            $cryptCurrency->data->date_added,
-            $cryptCurrency->data->quote->EUR->price,
-            $cryptCurrency->data->quotes->EUR->volume_24h,
-            $cryptCurrency->data->quotes->EUR->percent_change_1h,
-            $cryptCurrency->data->quotes->EUR->percent_change_7d,
-            $cryptCurrency->data->quotes->EUR->market_cap,
-            $cryptCurrency->data->max_supply
-            );
+        return  $cryptCurrency->data;
+    }
+    public function coinArray():array
+    {
+        $coins = $this->cryptoCurrencyData();
+        foreach ($coins as $coin)
+        {
+            $this->coinArray[] = new Coins(
+                $coin->name,
+                $coin->symbol,
+                $coin->total_supply,
+                $coin->date_added,
+                $coin->quote->EUR->price,
+                $coin->quotes->EUR->volume_24h,
+                $coin->quotes->EUR->percent_change_1h,
+                $coin->quotes->EUR->percent_change_7d,
+                $coin->quotes->EUR->market_cap,
+                $coin->max_supply
+                );
+        }
+        return $this->coinArray;
     }
 }
